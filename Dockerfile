@@ -4,7 +4,7 @@
 # commands for invoking python, and that virtualenvwrapper "clouds up" the environmnet namespace with
 # a ton of verbs like workon, mkvirtualenv, setproject etc.  I like the way pyenv and pyvenv solve both
 # these problems and will most likely use this approach for all my Python dev in the future.
-FROM ubuntu:14.10
+FROM bradleybossard/docker-devbox-common
 MAINTAINER Bradley Bossard <bradleybossard@gmail.com>
 
 # Build the image
