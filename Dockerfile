@@ -19,8 +19,7 @@ RUN apt-get update
 # Need git to install pyenv and pyvenv-virtualenv
 RUN apt-get install -y git
 # pyenv dependencies to compile python versions
-RUN apt-get install -y curl \
-  make \
+RUN apt-get install -y make \
   build-essential \
   libssl-dev \
   zlib1g-dev \
@@ -31,12 +30,8 @@ RUN apt-get install -y curl \
   python-pip \
   python-virtualenv
 
-# Add python_user and home directory with default bash shell
-RUN useradd -m -d /home/python_user -s /bin/bash -U python_user
-
 # Change to python_user home dir and change to user python_user
-WORKDIR /home/python_user
-USER python_user
+WORKDIR /root
 
 # Download pyenv and add it to the python_user .bashrc
 RUN git clone https://github.com/yyuu/pyenv.git .pyenv
@@ -50,7 +45,7 @@ RUN echo 'eval "$(pyenv virtualenv-init -)"' >> .bash_profile
 
 # Add the same PATH variables from above to current environment,
 # needed for the next install steps
-ENV HOME /home/python_user
+ENV HOME /root
 ENV PYENV_ROOT $HOME/.pyenv
 ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
 
@@ -58,4 +53,5 @@ ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
 RUN pyenv install 2.7.10
 RUN pyenv install 3.4.3
 RUN pyenv rehash
+RUN pyenv global 3.4.3 
 
