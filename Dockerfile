@@ -55,3 +55,5 @@ RUN pyenv install 3.4.3
 RUN pyenv rehash
 RUN pyenv global 3.4.3 
 
+RUN pip install --upgrade pip
+
